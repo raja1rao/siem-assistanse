@@ -326,7 +326,7 @@ class Widget:
                 txt1 = pageObj.extractText()
 
                 convlist = txt1.split()
-                print(convlist)
+                # print(convlist)
                 findoccs = convlist.index('Occurrence')
                 findocc = findoccs+1
 
@@ -344,7 +344,7 @@ class Widget:
                 victimsipi = ip.index('Victims')+3
                 # print(ip[victimsipi])
                 victimsipe = ip.index('Sources')-2
-                print(ip[victimsipe])
+                # print(ip[victimsipe])
 
                 for i in range(0, values):
                     if i % 4 == 0:
@@ -374,7 +374,8 @@ class Widget:
                                 #     self.compText.set(x)
                                 #     speak(x)
                                         
-
+            else:
+                print("there is no threats of give the write pdf")
 
 
                         
