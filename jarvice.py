@@ -10,6 +10,8 @@ import matplotlib.pyplot as plt
 from PIL import Image
 import random
 import inflect
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 client = wolframalpha.Client('7K53TX-WY9YKL68RX')
 
 # folder = 'C:\\Users\\skt\\Music\\YouTube\\'
@@ -246,26 +248,40 @@ class Widget:
             self.userText.set(recipient)
             recipient = recipient.lower()
 
-            if 'me' in recipient:
-                try:
-                    self.compText.set('What should I say? ')
-                    speak('What should I say? ')
-                    content = myCommand()
-                    self.userText.set(content)
-                    Your_password="donttellanyone1999@gmail.com"
-                    Your_Username="U@raja123"
-                    server = smtplib.SMTP('smtp.gmail.com', 587)
-                    server.ehlo()
-                    server.starttls()
-                    server.login(Your_Username, Your_password)
-                    server.sendmail('Your_Username', "Recipient_Username", content)
-                    server.close()
-                    self.compText.set('Email sent!')
-                    speak('Email sent!')
+            
+            try:
+                # self.compText.set('What should be the subject? ')
+                # speak('What should be the subject? ')
+                # subject = myCommand()
+                # self.userText.set(subject)
+                self.compText.set('What should I say? ')
+                speak('What should I say? ')
+                contents = myCommand()
+                # self.userText.set(contents)
+                # massage = MIMEMultipart()
 
-                except:
-                    self.compText.set('Email not sent!')
-                    speak('Sorry ' + 'Sir' + '!, I am unable to send your message at this moment!')
+                Your_password = "********"
+                Your_Username = "**************"
+                recipients = '**********'
+                # # massage['From'] = Your_Username
+                # # massage['To'] = recipients
+                # massage['Subject'] = subject
+                # massage.attach(MIMEText(contents,'plain'))
+                # content = massage.as_string()
+                
+
+                server = smtplib.SMTP('smtp.gmail.com', 587)
+                server.ehlo()
+                server.starttls()
+                server.login(Your_Username, Your_password)
+                server.sendmail(Your_Username, recipients, contents)
+                server.close()
+                self.compText.set('Email sent!')
+                speak('Email sent!')
+
+            except:
+                self.compText.set('Email not sent!')
+                speak('Sorry ' + 'Sir' + '!, I am unable to send your message at this moment!')
 
 
 
