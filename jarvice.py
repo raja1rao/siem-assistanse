@@ -366,14 +366,6 @@ class Widget:
                                           " whose Occurrence is " +
                                           mainlist[i+3] +
                                           " and the victim is "+p.number_to_words(vip))
-                                        
-                                # if vocc != mainlist[i+3]:
-                                #     x = mainlist[i]+"."+mainlist[i+1] + " is a  " + \
-                                #         mainlist[i+2] + \
-                                #         " whose Occurrence is " + mainlist[i+3]
-                                #     self.compText.set(x)
-                                #     speak(x)
-                                        
             else:
                 print("there is no threats of give the write pdf")
 
