@@ -336,54 +336,58 @@ class Widget:
 
             if 'Threats' in x:
                 print('threats are there')
-                pageObj = pdfReader.getPage(8)
+                for page in range(int(x[-1])+4):
 
-                # extracting text from page
-                txt1 = pageObj.extractText()
+                    pageObj = pdfReader.getPage(page)
 
-                convlist = txt1.split()
-                # print(convlist)
-                findoccs = convlist.index('Occurrence')
-                findocc = findoccs+1
+                    # extracting text from page
+                    txt1 = pageObj.extractText()
 
-                # print(findocc)
-                findVictims = convlist.index('Victims')
-                # print(findVictims)
-                findVictim = findVictims-1
-                mainlist = convlist[findocc:findVictim]
-                # print(mainlist)
-                values = len(mainlist)
-                value = values-4
+                    convlist = txt1.split()
 
-                ip = txt1.split()
-                # print(ip)
-                victimsipi = ip.index('Victims')+3
-                # print(ip[victimsipi])
-                victimsipe = ip.index('Sources')-2
-                # print(ip[victimsipe])
+                    if convlist[0] == 'Threats':
+                
+                        findoccs = convlist.index('Occurrence')
+                        findocc = findoccs+1
 
-                for i in range(0, values):
-                    if i % 4 == 0:
-                       
-                        for g in range(victimsipi, victimsipe):
-                            if g % 3 == 0:
-                                vip = ip[g]
-                                vocc = ip[g+1]
-                                p = inflect.engine()
-                                # print(vip+"and"+vocc)
-                                # print(mainlist[i])
-                                if vocc == mainlist[i+3]:
-                                    xx = mainlist[i]+"."+mainlist[i+1] + " is a  " + mainlist[i+2] + \
-                                        " whose Occurrence is " + \
-                                        mainlist[i+3] + \
-                                        " and the victim is "+vip
-                                    self.compText.set(xx)
-                                    speak(mainlist[i]+"."+mainlist[i+1] + " is a  " + mainlist[i+2] +
-                                          " whose Occurrence is " +
-                                          mainlist[i+3] +
-                                          " and the victim is "+p.number_to_words(vip))
+                        # print(findocc)
+                        findVictims = convlist.index('Victims')
+                        # print(findVictims)
+                        findVictim = findVictims-1
+                        mainlist = convlist[findocc:findVictim]
+                        # print(mainlist)
+                        values = len(mainlist)
+                        value = values-4
+
+                        ip = txt1.split()
+                        # print(ip)
+                        victimsipi = ip.index('Victims')+3
+                        # print(ip[victimsipi])
+                        victimsipe = ip.index('Sources')-2
+                        # print(ip[victimsipe])
+
+                        for i in range(0, values):
+                            if i % 4 == 0:
+                            
+                                for g in range(victimsipi, victimsipe):
+                                    if g % 3 == 0:
+                                        vip = ip[g]
+                                        vocc = ip[g+1]
+                                        p = inflect.engine()
+                                        # print(vip+"and"+vocc)
+                                        # print(mainlist[i])
+                                        if vocc == mainlist[i+3]:
+                                            xx = mainlist[i]+"."+mainlist[i+1] + " is a  " + mainlist[i+2] + \
+                                                " whose Occurrence is " + \
+                                                mainlist[i+3] + \
+                                                " and the victim is "+vip
+                                            self.compText.set(xx)
+                                            speak(mainlist[i]+"."+mainlist[i+1] + " is a  " + mainlist[i+2] +
+                                                " whose Occurrence is " +
+                                                mainlist[i+3] +
+                                                " and the victim is "+p.number_to_words(vip))
             else:
-                print("there is no threats of give the write pdf")
+                print("there is no threats of give the right pdf")
 
 
                         
