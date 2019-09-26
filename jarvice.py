@@ -50,12 +50,13 @@ def myCommand():
     try:
         query = r.recognize_google(audio, language='en-in')
         print('User: ' + query + '\n')
+        return query
         
     except sr.UnknownValueError:
         speak('Try again')
         pass
 
-    return query
+    
 
 
 def greetMe():
@@ -188,233 +189,239 @@ class Widget:
     
     def clicked(self):
         print('Working')
-        query = myCommand()
-        self.userText.set('Listening...')
-        self.userText.set(query)
-        query = query.lower()
-
-        if 'open word' in query:
-            self.compText.set('okay')
-            speak('okay')
-            subprocess.call(r'C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE')
-
-        elif 'open google chrome' in query:
-            self.compText.set('okay')
-            speak('okay')
-            subprocess.call(r'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe')
-
-        elif 'open powerpoint' in query:
-            self.compText.set('okay')
-            speak('okay')
-            subprocess.call(r'C:\Program Files\Microsoft Office\root\Office16\POWERPNT.EXE')
-
-        elif 'open youtube' in query:
-            self.compText.set('okay')
-            speak('okay')
-            webbrowser.open('www.youtube.com')
-        elif 'open calculator' in query:
-            self.compText.set('okay')
-            speak('okay')
-            import cal
-
-        elif 'open google' in query:
-            self.compText.set('okay')
-            speak('okay')
-            webbrowser.open('www.google.co.in')
-
-        elif 'open gmail' in query:
-            self.compText.set('okay')
-            speak('okay')
-            webbrowser.open('www.gmail.com')
-
-        elif 'shutdown' in query:
-            self.compText.set('okay')
-            speak('okay')
-            os.system('shutdown -s')
-
-        elif "what\'s up" in query or 'how are you' in query:
-            stMsgs = ['Just doing my thing!', 'I am fine!', 'Nice!', 'I am nice and full of energy']
-            self.compText.set(random.choice(stMsgs))
-            speak(random.choice(stMsgs))
         
-        elif "who are you" in query:
-            self.compText.set("i am Nandan! your virtual assistant")
-            speak("i am Nandan! your virtual assistant")
-        
-        elif 'email' in query:
-            self.compText.set('Who is the recipient? ')
-            speak('Who is the recipient? ')
-            recipient = myCommand()
-            self.userText.set(recipient)
-            recipient = recipient.lower()
-
-            
+        for i in range(1,1000) :
             try:
-                # self.compText.set('What should be the subject? ')
-                # speak('What should be the subject? ')
-                # subject = myCommand()
-                # self.userText.set(subject)
-                self.compText.set('What should I say? ')
-                speak('What should I say? ')
-                contents = myCommand()
-                # self.userText.set(contents)
-                # massage = MIMEMultipart()
-
-                Your_password = "********"
-                Your_Username = "**************"
-                recipients = '**********'
-                # # massage['From'] = Your_Username
-                # # massage['To'] = recipients
-                # massage['Subject'] = subject
-                # massage.attach(MIMEText(contents,'plain'))
-                # content = massage.as_string()
+                self.userText.set('Listening...')
+                query = myCommand()
+                self.userText.set(query)
                 
+                query = query.lower()
 
-                server = smtplib.SMTP('smtp.gmail.com', 587)
-                server.ehlo()
-                server.starttls()
-                server.login(Your_Username, Your_password)
-                server.sendmail(Your_Username, recipients, contents)
-                server.close()
-                self.compText.set('Email sent!')
-                speak('Email sent!')
+                if 'open word' in query:
+                    self.compText.set('okay')
+                    speak('okay')
+                    subprocess.call(r'C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE')
 
-            except:
-                self.compText.set('Email not sent!')
-                speak('Sorry ' + 'Sir' + '!, I am unable to send your message at this moment!')
+                elif 'open google chrome' in query:
+                    self.compText.set('okay')
+                    speak('okay')
+                    subprocess.call(r'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe')
 
+                elif 'open powerpoint' in query:
+                    self.compText.set('okay')
+                    speak('okay')
+                    subprocess.call(r'C:\Program Files\Microsoft Office\root\Office16\POWERPNT.EXE')
 
+                elif 'open youtube' in query:
+                    self.compText.set('okay')
+                    speak('okay')
+                    webbrowser.open('www.youtube.com')
+                elif 'open calculator' in query:
+                    self.compText.set('okay')
+                    speak('okay')
+                    import cal
 
-        elif 'nothing' in query or 'abort' in query or 'stop' in query:
-            self.compText.set('Okay')
-            speak('okay')
-            self.compText.set('Bye Sir, have a good day.')
-            speak('Bye Sir, have a good day.')
-            sys.exit()
-           
-        elif 'hello' in query:
-            self.compText.set('Hello Sir')
-            speak('Hello Sir')
+                elif 'open google' in query:
+                    self.compText.set('okay')
+                    speak('okay')
+                    webbrowser.open('www.google.co.in')
 
+                elif 'open gmail' in query:
+                    self.compText.set('okay')
+                    speak('okay')
+                    webbrowser.open('www.gmail.com')
 
-        elif 'bye' in query:
-            self.compText.set('Bye ' + 'Sir' + ', have a good day.')
-            speak('Bye ' + 'Sir' + ', have a good day.')
-            sys.exit()
-                                    
-        elif 'play music' in query:
-            music_folder = 'C:\\Users\\skt\\Music\\YouTube\\'
-            music = ['Edison', 'bensound-actionable', 'bensound-buddy', 'Micro', 'Lucid_Dreamer']
-            random_music = music_folder + random.choice(music) + '.mp3'
-            os.system(random_music)
-            
-            self.compText.set('Okay, here is your music! Enjoy!')
-            speak('Okay, here is your music! Enjoy!')
-        elif 'show me threads' in query or 'show me thread' in query or 'show me threats' in query:
+                elif 'shutdown' in query:
+                    self.compText.set('okay')
+                    speak('okay')
+                    os.system('shutdown -s')
 
-           # importing required modules
-
-
-            # creating a pdf file object
-            pdfFileObj = open('default.pdf', 'rb')
-
-            # creating a pdf reader object
-            pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
-
-            # printing number of pages in pdf file
-            # print(pdfReader.numPages)
-
-            # creating a page object
-            pageObj = pdfReader.getPage(1)
-
-            # extracting text from page
-            txt = pageObj.extractText()
-
-
-            x = re.sub('['+string.punctuation+']', '', txt).split()
-
-
-            if 'Threats' in x:
-                print('threats are there')
-                for page in range(int(x[-1])+4):
-
-                    pageObj = pdfReader.getPage(page)
-
-                    # extracting text from page
-                    txt1 = pageObj.extractText()
-
-                    convlist = txt1.split()
-
-                    if convlist[0] == 'Threats':
+                elif "what\'s up" in query or 'how are you' in query:
+                    stMsgs = ['Just doing my thing!', 'I am fine!', 'Nice!', 'I am nice and full of energy']
+                    self.compText.set(random.choice(stMsgs))
+                    speak(random.choice(stMsgs))
                 
-                        findoccs = convlist.index('Occurrence')
-                        findocc = findoccs+1
+                elif "who are you" in query:
+                    self.compText.set("i am Nandan! your virtual assistant")
+                    speak("i am Nandan! your virtual assistant")
+                
+                elif 'email' in query:
+                    self.compText.set('Who is the recipient? ')
+                    speak('Who is the recipient? ')
+                    recipient = myCommand()
+                    self.userText.set(recipient)
+                    recipient = recipient.lower()
 
-                        # print(findocc)
-                        findVictims = convlist.index('Victims')
-                        # print(findVictims)
-                        findVictim = findVictims-1
-                        mainlist = convlist[findocc:findVictim]
-                        # print(mainlist)
-                        values = len(mainlist)
-                        value = values-4
+                    
+                    try:
+                        # self.compText.set('What should be the subject? ')
+                        # speak('What should be the subject? ')
+                        # subject = myCommand()
+                        # self.userText.set(subject)
+                        self.compText.set('What should I say? ')
+                        speak('What should I say? ')
+                        contents = myCommand()
+                        # self.userText.set(contents)
+                        # massage = MIMEMultipart()
 
-                        ip = txt1.split()
-                        # print(ip)
-                        victimsipi = ip.index('Victims')+3
-                        # print(ip[victimsipi])
-                        victimsipe = ip.index('Sources')-2
-                        # print(ip[victimsipe])
-
-                        for i in range(0, values):
-                            if i % 4 == 0:
-                            
-                                for g in range(victimsipi, victimsipe):
-                                    if g % 3 == 0:
-                                        vip = ip[g]
-                                        vocc = ip[g+1]
-                                        p = inflect.engine()
-                                        # print(vip+"and"+vocc)
-                                        # print(mainlist[i])
-                                        if vocc == mainlist[i+3]:
-                                            xx = mainlist[i]+"."+mainlist[i+1] + " is a  " + mainlist[i+2] + \
-                                                " whose Occurrence is " + \
-                                                mainlist[i+3] + \
-                                                " and the victim is "+vip
-                                            self.compText.set(xx)
-                                            speak(mainlist[i]+"."+mainlist[i+1] + " is a  " + mainlist[i+2] +
-                                                " whose Occurrence is " +
-                                                mainlist[i+3] +
-                                                " and the victim is "+p.number_to_words(vip))
-            else:
-                print("there is no threats of give the right pdf")
-
-
+                        Your_password = "********"
+                        Your_Username = "**************"
+                        recipients = '**********'
+                        # # massage['From'] = Your_Username
+                        # # massage['To'] = recipients
+                        # massage['Subject'] = subject
+                        # massage.attach(MIMEText(contents,'plain'))
+                        # content = massage.as_string()
                         
 
-            # closing the pdf file object
-            pdfFileObj.close()
+                        server = smtplib.SMTP('smtp.gmail.com', 587)
+                        server.ehlo()
+                        server.starttls()
+                        server.login(Your_Username, Your_password)
+                        server.sendmail(Your_Username, recipients, contents)
+                        server.close()
+                        self.compText.set('Email sent!')
+                        speak('Email sent!')
+
+                    except:
+                        self.compText.set('Email not sent!')
+                        speak('Sorry ' + 'Sir' + '!, I am unable to send your message at this moment!')
 
 
 
-            
-        else:
-            try:
-                try:
-                    res = client.query(query)
-                    results = next(res.results).text
-                    self.compText.set(results)
-                    speak(results)
-                except:
-                    results = wikipedia.summary(query, sentences=2)
-                    self.compText.set(results)
-                    speak(results)
-        
-            except:
-                speak('I don\'t know Sir! Google is smarter than me!')
-                self.compText.set('I don\'t know Sir! Google is smarter than me!')
-                webbrowser.open('www.google.com')
+                elif 'nothing' in query or 'abort' in query or 'stop' in query:
+                    self.compText.set('Okay')
+                    speak('okay')
+                    self.compText.set('Bye Sir, have a good day.')
+                    speak('Bye Sir, have a good day.')
+                    sys.exit()
                 
+                elif 'hello' in query:
+                    self.compText.set('Hello Sir')
+                    speak('Hello Sir')
+
+
+                elif 'bye' in query:
+                    self.compText.set('Bye ' + 'Sir' + ', have a good day.')
+                    speak('Bye ' + 'Sir' + ', have a good day.')
+                    sys.exit()
+                                            
+                elif 'play music' in query:
+                    music_folder = 'C:\\Users\\skt\\Music\\YouTube\\'
+                    music = ['Edison', 'bensound-actionable', 'bensound-buddy', 'Micro', 'Lucid_Dreamer']
+                    random_music = music_folder + random.choice(music) + '.mp3'
+                    os.system(random_music)
+                    
+                    self.compText.set('Okay, here is your music! Enjoy!')
+                    speak('Okay, here is your music! Enjoy!')
+                elif 'show me threads' in query or 'show me thread' in query or 'show me threats' in query:
+
+                # importing required modules
+
+
+                    # creating a pdf file object
+                    pdfFileObj = open('default.pdf', 'rb')
+
+                    # creating a pdf reader object
+                    pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
+
+                    # printing number of pages in pdf file
+                    # print(pdfReader.numPages)
+
+                    # creating a page object
+                    pageObj = pdfReader.getPage(1)
+
+                    # extracting text from page
+                    txt = pageObj.extractText()
+
+
+                    x = re.sub('['+string.punctuation+']', '', txt).split()
+
+
+                    if 'Threats' in x:
+                        print('threats are there')
+                        for page in range(int(x[-1])+4):
+
+                            pageObj = pdfReader.getPage(page)
+
+                            # extracting text from page
+                            txt1 = pageObj.extractText()
+
+                            convlist = txt1.split()
+
+                            if convlist[0] == 'Threats':
+                        
+                                findoccs = convlist.index('Occurrence')
+                                findocc = findoccs+1
+
+                                # print(findocc)
+                                findVictims = convlist.index('Victims')
+                                # print(findVictims)
+                                findVictim = findVictims-1
+                                mainlist = convlist[findocc:findVictim]
+                                # print(mainlist)
+                                values = len(mainlist)
+                                value = values-4
+
+                                ip = txt1.split()
+                                # print(ip)
+                                victimsipi = ip.index('Victims')+3
+                                # print(ip[victimsipi])
+                                victimsipe = ip.index('Sources')-2
+                                # print(ip[victimsipe])
+
+                                for i in range(0, values):
+                                    if i % 4 == 0:
+                                    
+                                        for g in range(victimsipi, victimsipe):
+                                            if g % 3 == 0:
+                                                vip = ip[g]
+                                                vocc = ip[g+1]
+                                                p = inflect.engine()
+                                                # print(vip+"and"+vocc)
+                                                # print(mainlist[i])
+                                                if vocc == mainlist[i+3]:
+                                                    xx = mainlist[i]+"."+mainlist[i+1] + " is a  " + mainlist[i+2] + \
+                                                        " whose Occurrence is " + \
+                                                        mainlist[i+3] + \
+                                                        " and the victim is "+vip
+                                                    self.compText.set(xx)
+                                                    speak(mainlist[i]+"."+mainlist[i+1] + " is a  " + mainlist[i+2] +
+                                                        " whose Occurrence is " +
+                                                        mainlist[i+3] +
+                                                        " and the victim is "+p.number_to_words(vip))
+                    else:
+                        print("there is no threats of give the right pdf")
+
+
+                                
+
+                    # closing the pdf file object
+                    pdfFileObj.close()
+
+
+
+                    
+                else:
+                    try:
+                        try:
+                            res = client.query(query)
+                            results = next(res.results).text
+                            self.compText.set(results)
+                            speak(results)
+                        except:
+                            results = wikipedia.summary(query, sentences=2)
+                            self.compText.set(results)
+                            speak(results)
+                
+                    except:
+                        speak('I don\'t know Sir! Google is smarter than me!')
+                        self.compText.set('I don\'t know Sir! Google is smarter than me!')
+                        webbrowser.open('www.google.com')
+            except:
+                
+                pass
 if __name__ == '__main__':
     pupup() 
     greetMe()
