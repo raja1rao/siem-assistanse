@@ -1,11 +1,11 @@
-pip install SpeechRecognition
-pip install Pillow==2.2.2
-pip install DateTime
-pip install syspath
-pip install wolframalpha
-pip install secure-smtplib
-pip install pygame
-pip install subprocess.run
-pip install numpy
-pip install matplotlib
-pip install inflect
+SpeechRecognition
+Pillow==2.2.2
+DateTime
+syspath
+wolframalpha
+secure-smtplib
+pygame
+subprocess.run
+numpy
+matplotlib
+inflect

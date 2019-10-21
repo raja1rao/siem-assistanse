@@ -2,6 +2,7 @@ import PyPDF2
 import string
 import re
 from tkinter import *
+import PIL
 from PIL import ImageTk, Image
 import speech_recognition as sr
 import pyttsx3, datetime, sys, wikipedia, wolframalpha, os, smtplib, random, webbrowser, pygame, subprocess
@@ -12,6 +13,10 @@ import random
 import inflect
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import tkinter as tk
+from tkinter import filedialog, Text
+import os
+import PyPDF2
 client = wolframalpha.Client('7K53TX-WY9YKL68RX')
 
 # folder = 'C:\\Users\\skt\\Music\\YouTube\\'
@@ -315,90 +320,11 @@ class Widget:
                     
                     self.compText.set('Okay, here is your music! Enjoy!')
                     speak('Okay, here is your music! Enjoy!')
+
+
                 elif 'show me threads' in query or 'show me thread' in query or 'show me threats' in query:
-
-                # importing required modules
-
-
-                    # creating a pdf file object
-                    pdfFileObj = open('default.pdf', 'rb')
-
-                    # creating a pdf reader object
-                    pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
-
-                    # printing number of pages in pdf file
-                    # print(pdfReader.numPages)
-
-                    # creating a page object
-                    pageObj = pdfReader.getPage(1)
-
-                    # extracting text from page
-                    txt = pageObj.extractText()
-
-
-                    x = re.sub('['+string.punctuation+']', '', txt).split()
-
-
-                    if 'Threats' in x:
-                        print('threats are there')
-                        for page in range(int(x[-1])+4):
-
-                            pageObj = pdfReader.getPage(page)
-
-                            # extracting text from page
-                            txt1 = pageObj.extractText()
-
-                            convlist = txt1.split()
-
-                            if convlist[0] == 'Threats':
-                        
-                                findoccs = convlist.index('Occurrence')
-                                findocc = findoccs+1
-
-                                # print(findocc)
-                                findVictims = convlist.index('Victims')
-                                # print(findVictims)
-                                findVictim = findVictims-1
-                                mainlist = convlist[findocc:findVictim]
-                                # print(mainlist)
-                                values = len(mainlist)
-                                value = values-4
-
-                                ip = txt1.split()
-                                # print(ip)
-                                victimsipi = ip.index('Victims')+3
-                                # print(ip[victimsipi])
-                                victimsipe = ip.index('Sources')-2
-                                # print(ip[victimsipe])
-
-                                for i in range(0, values):
-                                    if i % 4 == 0:
-                                    
-                                        for g in range(victimsipi, victimsipe):
-                                            if g % 3 == 0:
-                                                vip = ip[g]
-                                                vocc = ip[g+1]
-                                                p = inflect.engine()
-                                                # print(vip+"and"+vocc)
-                                                # print(mainlist[i])
-                                                if vocc == mainlist[i+3]:
-                                                    xx = mainlist[i]+"."+mainlist[i+1] + " is a  " + mainlist[i+2] + \
-                                                        " whose Occurrence is " + \
-                                                        mainlist[i+3] + \
-                                                        " and the victim is "+vip
-                                                    self.compText.set(xx)
-                                                    speak(mainlist[i]+"."+mainlist[i+1] + " is a  " + mainlist[i+2] +
-                                                        " whose Occurrence is " +
-                                                        mainlist[i+3] +
-                                                        " and the victim is "+p.number_to_words(vip))
-                    else:
-                        print("there is no threats of give the right pdf")
-
-
-                                
-
-                    # closing the pdf file object
-                    pdfFileObj.close()
+                    import gui
+                    
 
 
 
